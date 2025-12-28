@@ -19,24 +19,42 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	var ranges []string
+	var line1, line2, line3, line4, line5 []string
+	i := 0
 	for scanner.Scan() {
 		line := scanner.Text()
-		ranges = append(ranges, line)
+		if i == 0 {
+			line1 = strings.Fields(line)
+		}
+		if i == 1 {
+			line2 = strings.Fields(line)
+		}
+		if i == 2 {
+			line3 = strings.Fields(line)
+		}
+		if i == 3 {
+			line4 = strings.Fields(line)
+		}
+		if i == 4 {
+			line5 = strings.Fields(line)
+		}
+		i++
 	}
 
-	freshSet := make(map[int]bool)
+	sum := 0
 
-	for _, r := range ranges {
-		index := strings.Index(r, "-")
+	for j := 0; j < len(line1); j++ {
+		a, _ := strconv.Atoi(line1[j])
+		b, _ := strconv.Atoi(line2[j])
+		c, _ := strconv.Atoi(line3[j])
+		d, _ := strconv.Atoi(line4[j])
 
-		start, _ := strconv.Atoi(r[:index])
-		end, _ := strconv.Atoi(r[index+1:])
-
-		for i := start; i <= end; i++ {
-			freshSet[i] = true
+		if line5[j] == "+" {
+			sum += a + b + c + d
+		} else {
+			sum += a * b * c * d
 		}
 	}
 
-	fmt.Println(len(freshSet))
+	fmt.Println(sum)
 }
