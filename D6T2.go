@@ -24,12 +24,7 @@ func main() {
 	}
 
 	rows := len(grid)
-	cols := 0
-	for _, r := range grid {
-		if len(r) > cols {
-			cols = len(r)
-		}
-	}
+	cols := len(grid[0])
 
 	sum := 0
 	lastEmptyCol := -1
@@ -47,24 +42,21 @@ func main() {
 		if isEmpty || c == cols {
 			if lastEmptyCol+1 >= c {
 				lastEmptyCol = c
-				continue
 			}
 
 			opCol := -1
-			if rows > 0 {
-				for k := lastEmptyCol + 1; k < c; k++ {
-					if k < len(grid[rows-1]) {
-						if grid[rows-1][k] == '+' || grid[rows-1][k] == '*' {
-							opCol = k
-							break
-						}
+
+			for k := lastEmptyCol + 1; k < c; k++ {
+				if k < len(grid[rows-1]) {
+					if grid[rows-1][k] == '+' || grid[rows-1][k] == '*' {
+						opCol = k
+						break
 					}
 				}
 			}
 
 			if opCol == -1 {
 				lastEmptyCol = c
-				continue
 			}
 
 			var numbers []int

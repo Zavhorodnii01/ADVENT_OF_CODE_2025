@@ -39,7 +39,6 @@ func main() {
 		ranges = append(ranges, Range{start, end})
 	}
 
-	// sort ranges by start
 	sort.Slice(ranges, func(i, j int) bool {
 		return ranges[i].start < ranges[j].start
 	})
